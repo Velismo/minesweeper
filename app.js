@@ -26,6 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
             square.addEventListener('click', function(e) {
                 click(square)
             })
+
+            //cntrl and left click
+            square.oncontextmenu = function(e) {
+                e.preventDefault()
+                addFlag(square)
+            }
         }
 
         //add numbers
@@ -57,11 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!square.classList.contains('checked') && (flags < bombAmount)) {
             if(!square.classList.contains('flag')) {
                 square.classList.add('flag')
-                square.innerHTML('🚩')
+                square.innerHTML = (' 🚩')
                 flags ++
+                checkForWin()
             } else {
                 square.classList.remove('flag')
-                square.innerHTML('')
+                square.innerHTML = ''
                 flags --
             }
         }
@@ -78,6 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let total = square.getAttribute('data')
             if (total !=0) {
                 square.classList.add('checked')
+                if (total == 1) square.classList.add('one')
+                if (total == 2) square.classList.add('two')
+                if (total == 3) square.classList.add('three')
+                if (total == 4) square.classList.add('four')
                 square.innerHTML = total
                 return
             }
@@ -146,5 +157,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 square.innerHTML = '💣'
             }
         })
+    }
+
+    // check for win
+    function checkForWin() {
+        let matches = 0
+        for(let i = 0; i < squares.length; i++) {
+            if (squares[i].classList.contains('flag') && squares[i].classList.contains('bomb')) {
+                matches ++
+            }
+            if (matches === bombAmount) {
+                console.log('YOU WIN!')
+                isGameOver = true
+            }
+        }
     }
 })
