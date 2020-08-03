@@ -11,7 +11,11 @@
     width: 40px;
 }
 
+.checked {
+    background-color: red;
+}
+
 .bomb {
     background-color: orange;
-    
+
 }
