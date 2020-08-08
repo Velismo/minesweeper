@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 square.classList.add('flag')
                 square.innerHTML = (' 🚩')
                 flags ++
-                flagsLeft.innerHTML = bombAmount - flasgs
+                flagsLeft.innerHTML = bombAmount - flags
                 checkForWin()
             } else {
                 square.classList.remove('flag')
@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // game over
     function gameOver(square) {
-        result.innerHTML('BOOM! Game Over!')
+        result.innerHTML = 'BOOM! Game Over!'
         isGameOver = true
 
         // show all the bombs when the game is over
